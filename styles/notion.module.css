@@ -1,0 +1,55 @@
+.notion {
+  @apply text-foreground;
+}
+
+.notion h1 {
+  @apply scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl mb-8;
+}
+
+.notion h2 {
+  @apply scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0 mb-6;
+}
+
+.notion h3 {
+  @apply scroll-m-20 text-2xl font-semibold tracking-tight mb-4;
+}
+
+.notion p {
+  @apply leading-7 [&:not(:first-child)]:mt-6 text-muted-foreground;
+}
+
+.notion ul {
+  @apply my-6 ml-6 list-disc [&>li]:mt-2;
+}
+
+.notion ol {
+  @apply my-6 ml-6 list-decimal [&>li]:mt-2;
+}
+
+.notion code {
+  @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+}
+
+.notion pre {
+  @apply mb-4 mt-6 overflow-x-auto rounded-lg border bg-black p-4;
+}
+
+.notion pre code {
+  @apply relative rounded bg-transparent p-0 font-mono text-sm;
+}
+
+.notion blockquote {
+  @apply mt-6 border-l-2 pl-6 italic;
+}
+
+.notion img {
+  @apply rounded-md border my-8;
+}
+
+.notion a {
+  @apply font-medium underline underline-offset-4 hover:text-primary;
+}
+
+.notion hr {
+  @apply my-4 md:my-8;
+}
