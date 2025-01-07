@@ -5,11 +5,12 @@ import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { getProjects } from "@/lib/notion"
 import { BorderTrail } from "@/components/ui/border-trail"
+import { constructMetadata } from "@/lib/metadata"
 
-export const metadata: Metadata = {
-  title: "Projects - Amadeu Ferreira",
-  description: "Check out my latest projects and work",
-}
+export const metadata: Metadata = constructMetadata({
+  title: "Projects | Amadeu Ferreira",
+  description: "A showcase of my projects and work in software development, open source, and technology.",
+})
 
 export const revalidate = 3600 // Revalidate every hour
 

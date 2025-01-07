@@ -2,6 +2,8 @@ import { getPageContent, getPageBySlug, notionClient } from "@/lib/notion";
 import { NotionRenderer } from "@notion-render/client";
 import { notFound } from "next/navigation";
 import { TracingBeam } from "@/components/ui/tracing-beam";
+import { constructMetadata } from "@/lib/metadata";
+import type { Metadata } from "next";
 
 //Plugins
 import hljsPlugin from "@notion-render/hljs-plugin";
@@ -9,7 +11,24 @@ import bookmarkPlugin from "@notion-render/bookmark-plugin";
 
 import { Post } from "@/components/blog";
 
-export default async function Page({ params }: { params: { slug: string } }) {
+interface Props {
+  params: { slug: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const post = await getPageBySlug(decodeURIComponent(params.slug));
+  if (!post) return constructMetadata({ title: 'Post Not Found', noIndex: true });
+
+  const ogImage = post.cover_image || post.img_URL;
+  
+  return constructMetadata({
+    title: `${post.title} | Amadeu Ferreira's Blog`,
+    description: post.meta_description,
+    image: ogImage,
+  })
+}
+
+export default async function Page({ params }: Props) {
   const post = await getPageBySlug(decodeURIComponent(params.slug));
   if (!post) notFound();
 

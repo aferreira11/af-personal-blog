@@ -2,14 +2,17 @@
 
 import { InView } from "@/components/ui/in-view";
 import { Timeline } from "@/components/ui/timeline";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { ContactDialog } from "@/components/contact-dialog";
-import { useState } from "react";
+import { useState, useRef, useEffect, useId } from "react";
 import { TextEffect } from "@/components/ui/text-effect";
 import { CustomButton } from "@/components/ui/custom-button";
-import { BorderTrail } from "@/components/ui/border-trail";
 import { ImageCarousel } from "@/components/ui/image-carousel";
+import { AnimatePresence, motion } from "framer-motion";
+import { useOutsideClick } from "@/hooks/use-outside-click";
+import { timelineData, type TimelineImage } from "@/utils/timeline-data";
+import { TimelineEntry } from "@/components/timeline-entry";
+import { TimelineCard } from "@/components/timeline-card";
 
 // Animation variants
 const fadeInVariants = {
@@ -20,23 +23,7 @@ const fadeInVariants = {
 // Content constants
 const introTextPart1 = `Learning how to learn is the most important skill in the 21st century.`;
 
-// Image utilities
-const placeholderImages = {
-  1: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80", // Tech workspace
-  2: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80", // Coding
-  3: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80", // Business meeting
-  4: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80", // Team collaboration
-  5: "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&q=80", // Tech infrastructure
-  6: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80", // Developer team
-  7: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80", // Startup office
-  8: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80", // Team planning
-  9: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80", // Code review
-  10: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80" // Development
-};
-
-const getPlaceholderImage = (id: number) => placeholderImages[id as keyof typeof placeholderImages];
-
-// Add this constant at the top of your file
+// Hero carousel images
 const carouselImages = [
   {
     src: "/amadeu_communitech.jpeg",
@@ -54,6 +41,40 @@ const carouselImages = [
 
 export default function About() {
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [active, setActive] = useState<TimelineImage | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const id = useId();
+
+  useEffect(() => {
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setActive(null);
+      }
+    }
+
+    if (active) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [active]);
+
+  useOutsideClick(ref, () => setActive(null));
+
+  const formattedTimelineData = timelineData.map(entry => ({
+    title: entry.title,
+    content: (
+      <TimelineEntry
+        description={entry.description}
+        images={entry.images}
+        onImageClick={setActive}
+        id={id}
+      />
+    )
+  }));
 
   return (
     <main className="min-h-screen">
@@ -125,7 +146,7 @@ export default function About() {
               A timeline of my professional journey and key milestones.
             </p>
           </div>
-          <Timeline data={timelineData} />
+          <Timeline data={formattedTimelineData} />
         </div>
       </div>
 
@@ -138,16 +159,16 @@ export default function About() {
               transition={{ duration: 0.8, ease: [0.4, 0.0, 0.2, 1] }}
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Let's Build Something Amazing Together
+                Let&apos;s Build Something Amazing Together
               </h2>
               <p className="text-lg text-neutral-700 dark:text-neutral-300 mb-8">
-                Whether you're looking to innovate, scale, or transform your digital presence,
-                I'm here to help turn your vision into reality.
+                Whether you&apos;re looking to innovate, scale, or transform your digital presence,
+                I&apos;m here to help turn your vision into reality.
               </p>
               <div className="flex gap-4 justify-center">
                 <ContactDialog open={isContactOpen} onOpenChange={setIsContactOpen}>
                   <CustomButton variant="primary">
-                    Start a Project <ArrowRight className="ml-2 h-4 w-4" />
+                    Get in touch <ArrowRight className="ml-2 h-4 w-4" />
                   </CustomButton>
                 </ContactDialog>
               </div>
@@ -155,92 +176,32 @@ export default function About() {
           </div>
         </div>
       </div>
+
+      {/* Expandable Image Modal */}
+      <AnimatePresence>
+        {active && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/80 z-50"
+              onClick={() => setActive(null)}
+            />
+            <div className="fixed inset-0 grid place-items-center z-[51] p-4">
+              <TimelineCard
+                ref={ref}
+                image={active}
+                year={timelineData.find(entry => 
+                  entry.images?.some(img => img.title === active.title)
+                )?.title || ""}
+                onClose={() => setActive(null)}
+                id={id}
+              />
+            </div>
+          </>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
-
-// Timeline data
-const timelineData = [
-  {
-    title: "2024",
-    content: (
-      <div>
-        <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base font-normal mb-4 md:mb-8">
-          Developed a Retrieval-Augmented Generation (RAG) system to enable the creation of a personalized financial assistant, offering tailored financial advice and insights.
-        </p>
-        <div className="grid grid-cols-2 gap-2 md:gap-4">
-          <Image
-            src={getPlaceholderImage(1)}
-            alt="Project 1"
-            width={500}
-            height={500}
-            className="rounded-lg object-cover h-32 md:h-44 lg:h-60 w-full shadow-md md:shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-          />
-          <Image
-            src={getPlaceholderImage(2)}
-            alt="Project 2"
-            width={500}
-            height={500}
-            className="rounded-lg object-cover h-32 md:h-44 lg:h-60 w-full shadow-md md:shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-          />
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "2022-2023",
-    content: (
-      <div>
-        <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base font-normal mb-4 md:mb-8">
-          As Founder & CEO, built an Open Banking platform connecting 5,000+ institutions across 25+ countries to improve financial inclusion for newcomers moving to North America.
-        </p>
-        <div className="grid grid-cols-2 gap-2 md:gap-4">
-          <Image
-            src={getPlaceholderImage(3)}
-            alt="Project 3"
-            width={500}
-            height={500}
-            className="rounded-lg object-cover h-32 md:h-44 lg:h-60 w-full shadow-md md:shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-          />
-          <Image
-            src={getPlaceholderImage(4)}
-            alt="Project 4"
-            width={500}
-            height={500}
-            className="rounded-lg object-cover h-32 md:h-44 lg:h-60 w-full shadow-md md:shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-          />
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "2021",
-    content: (
-      <div>
-        <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base font-normal">
-          Developed and led the product vision and implementation for a blockchain-based intellectual property protection platform.
-        </p>
-      </div>
-    ),
-  },
-  {
-    title: "2020",
-    content: (
-      <div>
-        <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base font-normal">
-          Directed product strategy for an AI-powered Knowledge Management System tailored to legal professionals. Delivered data-driven solutions to transform how legal teams manage and access critical information.
-        </p>
-      </div>
-    ),
-  },
-  {
-    title: "2019",
-    content: (
-      <div>
-        <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base font-normal">
-          Founded Aflux AI, a startup focused on AI-powered data analytics for legal professionals in Brazil.
-        </p>
-      </div>
-    ),
-  },
-];

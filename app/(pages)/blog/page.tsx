@@ -2,6 +2,13 @@ import { FeaturedBlogCard } from "@/components/featured-blog-card"
 import { BlogCard } from "@/components/blog-card"
 import { getPosts } from "@/lib/notion"
 import { formatDate } from "@/lib/utils"
+import { constructMetadata } from "@/lib/metadata"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = constructMetadata({
+  title: "Blog | Amadeu Ferreira",
+  description: "Thoughts on software development, startups, and technology. Written by Amadeu Ferreira.",
+})
 
 export const revalidate = 3600 // Revalidate every hour
 

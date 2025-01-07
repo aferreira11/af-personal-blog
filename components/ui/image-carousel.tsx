@@ -10,10 +10,11 @@ interface ImageCarouselProps {
     alt: string;
   }[];
   autoPlayInterval?: number;
+  startIndex?: number;
 }
 
-export function ImageCarousel({ images, autoPlayInterval = 5000 }: ImageCarouselProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+export function ImageCarousel({ images, autoPlayInterval = 5000, startIndex = 0 }: ImageCarouselProps) {
+  const [currentIndex, setCurrentIndex] = useState(startIndex);
   const [isPaused, setIsPaused] = useState(false);
 
   const nextImage = useCallback(() => {
@@ -29,7 +30,11 @@ export function ImageCarousel({ images, autoPlayInterval = 5000 }: ImageCarousel
   };
 
   useEffect(() => {
-    if (!isPaused) {
+    setCurrentIndex(startIndex);
+  }, [startIndex]);
+
+  useEffect(() => {
+    if (!isPaused && autoPlayInterval > 0) {
       const interval = setInterval(nextImage, autoPlayInterval);
       return () => clearInterval(interval);
     }

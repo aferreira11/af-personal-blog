@@ -6,21 +6,11 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { LayoutWithSidebar } from "@/components/layout-with-sidebar"
 import { Toaster } from "@/components/ui/toaster"
+import { constructMetadata } from "@/lib/metadata"
 
 const inter = Inter({ subsets: ["latin"] })
 
-export const metadata: Metadata = {
-  title: "The Modern Polymath | Amadeu Ferreira's Blog",
-  description: "Personal blog of Amadeu Ferreira, covering tech, everything startup, and more.",
-  icons: {
-    icon: [
-      {
-        url: "/favicon.svg",
-        type: "image/svg+xml",
-      }
-    ],
-  },
-}
+export const metadata: Metadata = constructMetadata()
 
 export default function RootLayout({
   children,

@@ -1,6 +1,8 @@
 import { getPageContent, getProject, notionClient } from "@/lib/notion";
 import { NotionRenderer } from "@notion-render/client";
 import { notFound } from "next/navigation";
+import { constructMetadata } from "@/lib/metadata";
+import type { Metadata } from "next";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 
 //Plugins
@@ -9,7 +11,24 @@ import bookmarkPlugin from "@notion-render/bookmark-plugin";
 
 import { Project } from "@/components/projects/project";
 
-export default async function Page({ params }: { params: { slug: string } }) {
+interface Props {
+  params: { slug: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const project = await getProject(decodeURIComponent(params.slug));
+  if (!project) return constructMetadata({ title: 'Project Not Found', noIndex: true });
+
+  const ogImage = project.cover_image || project.img_URL;
+  
+  return constructMetadata({
+    title: `${project.title} | Projects - Amadeu Ferreira`,
+    description: project.meta_description,
+    image: ogImage,
+  })
+}
+
+export default async function Page({ params }: Props) {
   const project = await getProject(decodeURIComponent(params.slug));
   if (!project) notFound();
 

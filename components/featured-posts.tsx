@@ -13,12 +13,12 @@ export async function FeaturedPosts() {
     <section className="relative py-24">
       <div className="max-w-6xl mx-auto">
         <div className="space-y-12">
-          <div className="space-y-4">
+          <div className="space-y-4 text-center">
             <h2 className="text-4xl font-bold tracking-tight text-black dark:text-white">
               Featured Articles
             </h2>
             <p className="text-lg text-black/80 dark:text-white/80">
-              Deep dives into product, technology, and innovation
+              My latest articles on product, technology, and innovation
             </p>
           </div>
 

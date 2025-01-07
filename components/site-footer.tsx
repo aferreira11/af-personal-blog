@@ -12,12 +12,10 @@ export function SiteFooter() {
         </p>
         <div className="flex items-center space-x-4">
           
-          <Link href="#" className="text-sm text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white transition-colors">
+          <Link href="https://www.linkedin.com/in/amadeuferreira/" className="text-sm text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white transition-colors">
             LinkedIn
           </Link>
-          <Link href="#" className="text-sm text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white transition-colors">
-            Contact
-          </Link>
+          
           
         </div>
       </div>
