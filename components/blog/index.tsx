@@ -49,7 +49,7 @@ export function Post(props: PostProps) {
             className="text-xs text-muted-foreground"
           >
             {new Date(created_time).toLocaleDateString('en-US', {
-              month: 'long',
+              month: 'short',
               day: 'numeric',
               year: 'numeric'
             })}

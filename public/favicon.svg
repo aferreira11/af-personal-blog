@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .background { fill: #111111; }
+    .letter { font-family: Inter, system-ui, sans-serif; font-weight: bold; font-size: 20px; fill: white; }
+    .blue-dot { fill: #004CFF; }
+    @media (prefers-color-scheme: dark) {
+      .background { fill: #111111; }
+    }
+  </style>
+  <circle cx="16" cy="16" r="16" class="background"/>
+  <text x="8" y="22" class="letter">A</text>
+  <circle cx="22" cy="22" r="2" class="blue-dot"/>
+</svg> 

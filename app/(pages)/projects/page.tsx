@@ -25,7 +25,7 @@ export default async function ProjectsPage() {
   })))
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container-padding py-8">
       <div className="max-w-[800px] mx-auto">
         <h1 className="text-4xl font-bold mb-6">Projects</h1>
         <p className="text-muted-foreground mb-8">
@@ -42,7 +42,7 @@ export default async function ProjectsPage() {
                   href={href} 
                   className="block relative group"
                 >
-                  <Card className="transition-all duration-300 hover:scale-[1.02] bg-background relative">
+                  <Card className="transition-all duration-300 hover:scale-[1.02] bg-background border-muted relative">
                     <div className="absolute inset-0 overflow-hidden rounded-xl">
                       <BorderTrail 
                         className="bg-gradient-to-r from-blue-500/50 to-blue-700/50 blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity"

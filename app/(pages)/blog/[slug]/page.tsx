@@ -28,7 +28,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <div className="min-h-screen relative">
-      <TracingBeam className="px-4 md:px-6">
+      <TracingBeam className="px-6 md:px-8">
         <div className="pb-40">
           <Post
             title={post.title}
@@ -36,6 +36,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
             created_time={post.created_time}
             categories={post.categories}
             meta_description={post.meta_description}
+            bannerImage=""
+            bannerImageWidth={1200}
+            bannerImageHeight={630}
           />
         </div>
       </TracingBeam>

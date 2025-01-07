@@ -10,7 +10,7 @@ export async function FeaturedPosts() {
   const posts = await getFeaturedPosts()
 
   return (
-    <section className="relative px-6 md:px-8 py-24">
+    <section className="relative py-24">
       <div className="max-w-6xl mx-auto">
         <div className="space-y-12">
           <div className="space-y-4">

@@ -28,16 +28,16 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <div className="min-h-screen relative">
-      <TracingBeam className="px-4 md:px-6">
+      <TracingBeam className="px-6 md:px-8">
         <div className="pb-40">
           <Project
             title={project.title}
             content={html}
             created_time={project.created_time}
             categories={project.categories}
-            bannerImage={project.cover_image || ''}
-            bannerImageWidth={project.img_width || 1200}
-            bannerImageHeight={project.img_height || 630}
+            bannerImage=""
+            bannerImageWidth={1200}
+            bannerImageHeight={630}
             meta_description={project.meta_description}
           />
         </div>

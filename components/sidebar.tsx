@@ -51,7 +51,7 @@ export function Sidebar() {
             </div>
           </div>
           <p className="text-sm text-muted-foreground mb-4">
-            I&apos;m a software engineer passionate about AI, photography, and building cool stuff. Join me as I explore the intersection of technology and creativity.
+            I&apos;m a tech founder, product manager, and self-taught developer passionate about building impactful digital experiences.
           </p>
           <Link href="/about" className="block overflow-visible">
             <Magnetic intensity={0.8} range={150}>
@@ -66,7 +66,7 @@ export function Sidebar() {
         <div>
           <h2 className="font-semibold mb-4">Topics I Write About:</h2>
           <div className="flex flex-wrap gap-2">
-            {["AI", "Photography", "Web Dev", "Tech", "Travel", "Keyboards"].map((topic) => (
+            {["AI", "Startups", "Solopreneurship", "Product Management", "Product Design", "Web Development"].map((topic) => (
               <Badge key={topic} variant="secondary">
                 {topic}
               </Badge>

@@ -10,9 +10,10 @@ function shouldShowSidebar(pathname: string) {
 export function LayoutWithSidebar({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const showSidebar = shouldShowSidebar(pathname);
+  const shouldRemoveTopPadding = pathname === '/' || pathname === '/about';
 
   return (
-    <div className={`flex ${showSidebar ? 'gap-10' : ''} py-8`}>
+    <div className={`flex ${showSidebar ? 'gap-10' : ''} ${shouldRemoveTopPadding ? 'pb-8' : 'py-8'}`}>
       <main className={`${showSidebar ? 'flex-1' : 'w-full'}`}>
         {children}
       </main>

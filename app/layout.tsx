@@ -12,6 +12,14 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "The Modern Polymath | Amadeu Ferreira's Blog",
   description: "Personal blog of Amadeu Ferreira, covering tech, everything startup, and more.",
+  icons: {
+    icon: [
+      {
+        url: "/favicon.svg",
+        type: "image/svg+xml",
+      }
+    ],
+  },
 }
 
 export default function RootLayout({
@@ -30,7 +38,7 @@ export default function RootLayout({
         >
           <div className="flex min-h-screen flex-col">
             <SiteHeader />
-            <div className="mx-auto w-full max-w-7xl flex-1 px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto w-full max-w-7xl flex-1">
               <LayoutWithSidebar>{children}</LayoutWithSidebar>
             </div>
             <SiteFooter />

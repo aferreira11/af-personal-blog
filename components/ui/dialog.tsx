@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import { motion, type Variants, type Transition } from 'framer-motion';
 import { X } from 'lucide-react';
 import * as React from 'react';
+import { createPortal } from 'react-dom';
 
 const DialogContext = React.createContext<{
   open?: boolean;
@@ -24,11 +25,12 @@ export function Dialog({ children, open, onOpenChange }: Omit<DialogProps, 'vari
   return (
     <DialogContext.Provider value={{ open, onOpenChange }}>
       {children}
-      {open && (
+      {open && createPortal(
         <div
           className="fixed inset-0 z-[49] bg-black/50"
           onClick={() => onOpenChange?.(false)}
-        />
+        />,
+        document.body
       )}
     </DialogContext.Provider>
   );
@@ -48,20 +50,24 @@ export function DialogContent({ children, className }: { children: React.ReactNo
   
   if (!open) return null;
   
-  return (
-    <div className="fixed inset-0 z-[51] flex items-center justify-center p-4">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 40 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: 40 }}
-        transition={{ type: 'spring', bounce: 0, duration: 0.25 }}
-        className={cn('relative rounded-lg shadow-lg', className)}
-        onClick={(e: React.MouseEvent) => e.stopPropagation()}
-        role="dialog"
-      >
-        {children}
-      </motion.div>
-    </div>
+  return createPortal(
+    <div className="fixed inset-0 z-[51] overflow-y-auto">
+      <div className="min-h-full flex items-center justify-center p-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95, y: 20 }}
+          transition={{ type: 'spring', bounce: 0, duration: 0.25 }}
+          className={cn('relative bg-background rounded-lg shadow-lg', className)}
+          onClick={(e: React.MouseEvent) => e.stopPropagation()}
+          role="dialog"
+          aria-modal="true"
+        >
+          {children}
+        </motion.div>
+      </div>
+    </div>,
+    document.body
   );
 }
 
