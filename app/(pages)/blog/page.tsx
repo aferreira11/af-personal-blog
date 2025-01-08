@@ -7,7 +7,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = constructMetadata({
   title: "Blog | Amadeu Ferreira",
-  description: "Thoughts on software development, startups, and technology. Written by Amadeu Ferreira.",
+  description: "Thoughts on product management, design, and software development.",
 })
 
 export const revalidate = 3600 // Revalidate every hour

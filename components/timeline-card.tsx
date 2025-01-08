@@ -5,6 +5,7 @@ import Image from "next/image";
 import { X, ArrowUpRight } from "lucide-react";
 import type { TimelineImage } from "@/utils/timeline-data";
 import { forwardRef } from "react";
+import Link from "next/link";
 
 interface TimelineCardProps {
   image: TimelineImage;
@@ -58,7 +59,7 @@ export const TimelineCard = forwardRef<HTMLDivElement, TimelineCardProps>(
               priority
             />
           </motion.div>
-          <div className="flex-1 flex flex-col min-h-0 px-4">
+          <div className="flex-1 flex flex-col min-h-0 px-4 mt-6">
             <div className="flex flex-col p-4 bg-white dark:bg-neutral-900">
               <motion.h3
                 layoutId={`title-${image.title}-${id}`}
@@ -72,18 +73,20 @@ export const TimelineCard = forwardRef<HTMLDivElement, TimelineCardProps>(
                 </motion.p>
                 <span className="text-neutral-400 dark:text-neutral-600">•</span>
                 <motion.div className="relative">
-                  <motion.a
-                    href="#"
+                  <Link
+                    href={`/projects/${image.projectSlug || ''}`}
                     className="group inline-flex items-center font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 transition-colors"
                     onClick={(e) => {
-                      e.preventDefault();
+                      if (!image.projectSlug) {
+                        e.preventDefault();
+                      }
                       onClose();
                     }}
                   >
                     View Project
                     <ArrowUpRight className="h-4 w-4 ml-1" />
                     <span className="absolute -bottom-1 left-0 w-full h-px bg-neutral-600 dark:bg-neutral-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-                  </motion.a>
+                  </Link>
                 </motion.div>
               </div>
             </div>
@@ -125,3 +128,5 @@ export const TimelineCard = forwardRef<HTMLDivElement, TimelineCardProps>(
     );
   }
 ); 
+
+TimelineCard.displayName = "TimelineCard"; 

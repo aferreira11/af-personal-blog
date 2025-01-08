@@ -6,6 +6,7 @@ export interface TimelineImage {
   height: number;
   description: string;
   overview: string;
+  projectSlug?: string;
   technicalDetails: {
     description: string;
     bulletPoints: string[];
@@ -26,7 +27,7 @@ export interface TimelineEntry {
 export const timelineData: TimelineEntry[] = [
   {
     title: "2024",
-    description: "Developed and launched AVA, an AI-powered financial assistant platform. The vision of a personalized financial assistant, offering tailored advice and insights to users worldwide.",
+    description: "Developed Ava (Alpha) as an AI financial assistant powered by Open Banking data. It was built to provide personalized financial advice to newcomers moving to Canada.",
     images: [
       {
         title: "AI Financial Assistant",
@@ -34,59 +35,52 @@ export const timelineData: TimelineEntry[] = [
         alt: "AVA Website",
         width: 1920,
         height: 1080,
-        description: "Next-gen financial advice platform",
-        overview: "AVA represents the future of financial guidance, leveraging advanced R&G technology to provide personalized financial advice. The platform analyzes vast amounts of financial data and user context to deliver tailored recommendations, making professional-grade financial guidance accessible to everyone.",
+        description: "Vambora",
+        projectSlug: "vambora-redefining-financial-inclusion-for-immigrants",
+        overview: "Ava (Automated Virtual Assistant) was developed as an AI financial assistant powered by Open Banking data. It was built to help increase financial literacy and promote financial inclusion for newcomers moving to Canada.",
         technicalDetails: {
-          description: "The platform leverages cutting-edge technologies including:",
+          description: "",
           bulletPoints: [
-            "Advanced Natural Language Processing for understanding user queries",
-            "Real-time data processing and analysis",
-            "Machine Learning models for personalized recommendations",
-            "Secure API integrations with financial institutions",
-            "Blockchain technology for secure data transmission"
+            "Used single API to connect to overseas financial institutions",
+            "Real-time data processing and analysis through OpenAI API",
+            "Mobile app built with React Native and Microsoft Azure for the backend"
           ]
         },
         impact: {
-          description: "This innovative solution has revolutionized how users interact with financial services, providing:",
-          bulletPoints: [
-            "24/7 access to personalized financial guidance",
-            "Improved financial literacy through interactive learning",
-            "Reduced barriers to financial services",
-            "Enhanced decision-making through data-driven insights"
-          ]
+          description: "Discontinued due to lack of funding",
+          bulletPoints: []
         }
       }
     ]
   },
   {
     title: "2023",
-    description: "As Founder & CEO, built an Open Banking platform connecting 5,000+ institutions across 25+ countries to improve financial inclusion for newcomers moving to North America.",
+    description: "Open Banking platform connecting 5,000+ institutions across 25+ countries to improve financial inclusion for newcomers moving to Canada.",
     images: [
       {
-        title: "Vambora Journey 2023",
+        title: "Cross-border Open Banking Infrastructure",
         src: "/deck-2023-dark.png",
         alt: "Vambora Pitch Deck 2023",
         width: 1920,
         height: 1080,
-        description: "Building trust beyond borders",
-        overview: "The 2023 journey marked a pivotal year for Vambora as we expanded our reach to over 25 countries. We've built robust partnerships with financial institutions worldwide, creating a network that enables seamless cross-border financial services.",
+        description: "Vambora",
+        projectSlug: "vambora-redefining-financial-inclusion-for-immigrants",
+        overview: "The Trust Profile was designed to work as a Digital ID for individuals without an established credit history and enable them to access financial services. We've built robust partnerships with financial institutions and fintechs, creating a network that enables seamless cross-border financial services.",
         technicalDetails: {
-          description: "Our global network is powered by:",
+          description: "",
           bulletPoints: [
-            "Distributed system architecture",
-            "Global payment networks integration",
-            "Multi-region deployment",
-            "24/7 monitoring systems",
-            "Automated compliance checks"
+            "Open Banking system integrating major data aggregators like Plaid worldwide",
+            "KYC/AML for individuals from 200+ countries and territories",
+            "Consent management system to for secure data sharing",
           ]
         },
         impact: {
-          description: "Our expansion has led to significant achievements:",
+          description: "",
           bulletPoints: [
-            "Connected 5,000+ financial institutions",
-            "Processed over $1B in transactions",
-            "Expanded to 25+ countries",
-            "Reduced cross-border transfer times by 85%"
+            "Access to over 100,000+ newcomers moving to Canada per year through partnerships with education institutions and immigration consultants",
+            "Established partnerships with major Canadian fintech startups (Neo Financial and KOHO)",
+            "Joined Forum Venture's accelerator program",
+            "Secured pre-seed funding"
           ]
         }
       }
@@ -94,33 +88,31 @@ export const timelineData: TimelineEntry[] = [
   },
   {
     title: "2022",
-    description: "Launched comprehensive risk assessment and identity verification platform for financial institutions, enabling better service for newcomers.",
+    description: "Minimum Viable Product (MVP) launched to learn the root cause of why newcomers are not accessing financial services.",
     images: [
       {
-        title: "Risk Assessment Platform",
+        title: "Service Marketplace for Newcomers",
         src: "/lp-2022.png",
         alt: "Landing Page 2022",
         width: 1920,
         height: 1080,
-        description: "Advanced risk profiling system",
-        overview: "Our risk assessment platform revolutionizes how financial institutions evaluate newcomers to North America. By incorporating alternative data sources and advanced analytics, we've created a more inclusive and accurate way to assess creditworthiness.",
+        description: "Vambora",
+        projectSlug: "vambora-redefining-financial-inclusion-for-immigrants",
+        overview: "Based on Amadeu's personal journey when he moved to Canada in 2016, he wanted to make it easier for newcomers to access financial services. By the end of the experiment, he confirmed an important hypothesis: newcomers have limited access to financial services because they don't have a credit history.",
         technicalDetails: {
-          description: "The platform utilizes advanced technologies for risk assessment:",
+          description: "",
           bulletPoints: [
-            "Machine learning for credit scoring",
-            "Alternative data processing",
-            "Real-time risk analysis",
-            "Automated verification systems",
-            "Secure data handling protocols"
+            "Initial MVP built with No-Code tools",
+            "Included a cost of living calculator based on the user's target city using the Numbeo API",
+            "Used Webflow (HTML/CSS), Wized (JavaScript) and Xano (PostgreSQL)"
           ]
         },
         impact: {
-          description: "The platform has achieved significant impact in financial inclusion:",
+          description: "The MVP clearly demonstrated that the lack of credit history is the root cause of why newcomers are not accessing financial services. It also debuted Vambora's brand and voice.",
           bulletPoints: [
-            "Enabled thousands of newcomers to access financial services",
-            "Reduced false rejection rates by 60%",
-            "Increased approval rates for qualified applicants",
-            "Streamlined onboarding process for financial institutions"
+            "Offered services like opening a bank account, cell phone and internet plans, housing consultancy, and more",
+            "Early traction with 1,000+ users registered",
+            "Helped 100+ users moved from Brazil to Canada using Vambora's services"
           ]
         }
       }
@@ -131,30 +123,30 @@ export const timelineData: TimelineEntry[] = [
     description: "Developed and led the product vision and implementation for a blockchain-based intellectual property protection platform.",
     images: [
       {
-        title: "Vambora Services",
-        src: "/vambora_services.jpeg",
-        alt: "Vambora Services Platform",
+        title: "Blockchain-Based Digital Content Certification and Marketplace",
+        src: "/UREEQA.webp",
+        alt: "UREEQA Platform",
         width: 1920,
         height: 1080,
-        description: "Blockchain-powered IP protection",
-        overview: "Led the development of a revolutionary blockchain-based platform for intellectual property protection, enabling creators and innovators to securely register and manage their IP rights.",
+        description: "UREEQA",
+        projectSlug: "ureeqa-securing-creative-rights-in-the-digital-age",
+        overview: "Led the product development team of UREEQA, a blockchain-based platform for digital content certification and marketplace. This innovative system enables creators to securely register, protect, and monetize their digital works through blockchain verification, NFT minting, and community-driven authentication processes.",
         technicalDetails: {
-          description: "The platform incorporates several innovative technologies:",
+          description: "The platform incorporates several innovative technologies to certify and protect digital creations:",
           bulletPoints: [
-            "Smart contract implementation for IP rights",
-            "Decentralized storage for IP assets",
-            "Automated rights management system",
-            "Blockchain-based verification",
-            "Digital signature integration"
+            "Blockchain-based certification for digital content",
+            "Community-driven content verification",
+            "NFT minting for immutable ownership claims",
+            "Rights management for monetization and licensing"
           ]
         },
         impact: {
-          description: "The platform has made significant contributions to IP protection:",
+          description: "The platform has achieved significant milestones in digital content protection:",
           bulletPoints: [
-            "Reduced IP registration time by 80%",
-            "Enhanced security for digital assets",
-            "Streamlined IP rights management",
-            "Improved transparency in IP ownership"
+            "Launched Validation-as-a-Service (VaaS) to combat NFT fraud and protect creators' rights.",
+            "Established partnerships with digital platforms like Venusverse to empower creators in the NFT space.",
+            "Developed a patented validation process to verify ownership, authorship, and originality of creative works.",
+            "Introduced Responsibly Minted™ NFTs, ensuring authenticity and legitimacy in the digital marketplace."
           ]
         }
       }
@@ -162,33 +154,32 @@ export const timelineData: TimelineEntry[] = [
   },
   {
     title: "2020",
-    description: "Directed product strategy for an AI-powered Knowledge Management System tailored to legal professionals. Delivered data-driven solutions to transform how legal teams manage and access critical information.",
+    description: "Directed product strategy and design for an AI-powered Knowledge Management System tailored to legal professionals. Delivered data-driven solutions to transform how legal teams manage and access critical information.",
     images: [
       {
-        title: "Legal Tech Innovation",
-        src: "/fintech_cadence.png",
-        alt: "Fintech Cadence Platform",
+        title: "Knowledge Management System for Legal Professionals",
+        src: "/primal-ai.webp",
+        alt: "Primal AI",
         width: 1920,
         height: 1080,
-        description: "AI-powered legal knowledge management",
-        overview: "Developed an innovative AI-powered platform that revolutionizes how legal professionals manage and access information, making legal research and document management more efficient and accurate.",
+        description: "Primal AI",
+        projectSlug: "primal-ai-knowledge-management-system-for-legal-professionals",
+        overview: "Using Primal's proprietary semantic search, led the team of developers and data scientists to build and ship the company's first successful B2B product.",
         technicalDetails: {
-          description: "The system leverages advanced AI technologies:",
+          description: "",
           bulletPoints: [
             "Natural Language Processing for document analysis",
             "Machine Learning for content categorization",
-            "Automated document summarization",
-            "Semantic search capabilities",
+            "Semantic search used for document retrieval",
             "Intelligent document linking"
           ]
         },
         impact: {
-          description: "The platform has transformed legal operations:",
+          description: "",
           bulletPoints: [
-            "Reduced research time by 70%",
-            "Improved document accuracy by 90%",
+            "Reduced research time by 90%",
             "Enhanced collaboration efficiency",
-            "Streamlined knowledge sharing"
+            "Product was acquired by a major AI company in Canada"
           ]
         }
       }
@@ -199,30 +190,26 @@ export const timelineData: TimelineEntry[] = [
     description: "Founded Aflux AI, a startup focused on AI-powered data analytics for legal professionals in Brazil.",
     images: [
       {
-        title: "Aflux AI Launch",
-        src: "/news.jpg",
-        alt: "News Coverage",
+        title: "AI-Powered Legal Analytics",
+        src: "/aflux-ai.png",
+        alt: "Aflux AI",
         width: 1920,
         height: 1080,
-        description: "AI-powered legal analytics platform",
+        description: "Aflux AI",
+        projectSlug: "aflux-ai-data-analytics-for-legal-professionals",
         overview: "Founded Aflux AI, pioneering the use of artificial intelligence in legal data analytics. The platform helped legal professionals in Brazil make data-driven decisions and improve their practice efficiency.",
         technicalDetails: {
-          description: "The platform was built with cutting-edge technologies:",
+          description: "",
           bulletPoints: [
             "Advanced data analytics engines",
             "Machine learning algorithms",
-            "Natural language processing",
-            "Automated reporting systems",
-            "Real-time data visualization"
+            "Natural language processing"
           ]
         },
         impact: {
-          description: "Aflux AI achieved significant milestones:",
+          description: "",
           bulletPoints: [
-            "Served 100+ legal firms in Brazil",
-            "Processed millions of legal documents",
-            "Reduced analysis time by 65%",
-            "Improved decision accuracy by 40%"
+            "Project was stopped due to COVID-19"
           ]
         }
       }

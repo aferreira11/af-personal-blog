@@ -8,6 +8,7 @@ import { createPortal } from 'react-dom'
 import { BackgroundBeamsWithCollision } from '@/components/ui/background-beams-with-collision'
 import { ModeToggle } from '@/components/mode-toggle'
 import { ContactDialog } from '@/components/contact-dialog'
+import { RiLinkedinBoxFill, RiGithubFill, RiBlueskyFill } from "react-icons/ri"
 
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false)
@@ -104,7 +105,7 @@ export function MobileNav() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col flex-1 p-6">
+                  <div className="flex flex-col flex-1">
                     <nav className="flex flex-col space-y-8 flex-1 mt-32">
                       {menuItems.map((item) => (
                         <Link
@@ -122,7 +123,33 @@ export function MobileNav() {
                         </Link>
                       ))}
                     </nav>
-                    <div className="flex justify-center mt-12 mb-6">
+                    <div className="flex justify-center space-x-4 mt-12 mb-8">
+                      <Link 
+                        href="https://github.com/aferreira11" 
+                        className="inline-flex items-center justify-center rounded-md w-10 h-10 bg-transparent text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white transition-colors hover:bg-accent"
+                        aria-label="GitHub Profile"
+                        onClick={closeMenu}
+                      >
+                        <RiGithubFill className="h-5 w-5" />
+                      </Link>
+                      <Link 
+                        href="https://bsky.app/profile/amadeuferreira.bsky.social" 
+                        className="inline-flex items-center justify-center rounded-md w-10 h-10 bg-transparent text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white transition-colors hover:bg-accent"
+                        aria-label="BlueSky Profile"
+                        onClick={closeMenu}
+                      >
+                        <RiBlueskyFill className="h-5 w-5" />
+                      </Link>
+                      <Link 
+                        href="https://www.linkedin.com/in/amadeuferreira/" 
+                        className="inline-flex items-center justify-center rounded-md w-10 h-10 bg-transparent text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white transition-colors hover:bg-accent"
+                        aria-label="LinkedIn Profile"
+                        onClick={closeMenu}
+                      >
+                        <RiLinkedinBoxFill className="h-5 w-5" />
+                      </Link>
+                    </div>
+                    <div className="flex justify-center mb-6">
                       <div className="rounded-full border border-border bg-background/80 backdrop-blur-sm p-2 hover:bg-accent transition-colors group focus:outline-none focus-visible:outline-none focus-visible:ring-0">
                         <ModeToggle className="[&>button]:hover:bg-transparent [&>button]:focus:outline-none [&>button]:focus-visible:outline-none [&>button]:focus-visible:ring-0 [&>button]:focus:ring-0 [&>button]:focus:ring-offset-0" />
                       </div>

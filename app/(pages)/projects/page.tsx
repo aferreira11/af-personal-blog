@@ -9,7 +9,7 @@ import { constructMetadata } from "@/lib/metadata"
 
 export const metadata: Metadata = constructMetadata({
   title: "Projects | Amadeu Ferreira",
-  description: "A showcase of my projects and work in software development, open source, and technology.",
+  description: "My projects and work in product management, design, and software development.",
 })
 
 export const revalidate = 3600 // Revalidate every hour
@@ -30,7 +30,7 @@ export default async function ProjectsPage() {
       <div className="max-w-[800px] mx-auto">
         <h1 className="text-4xl font-bold mb-6">Projects</h1>
         <p className="text-muted-foreground mb-8">
-          Here are some of the projects I've worked on. Each project represents a unique challenge and learning experience.
+          Here are some of the projects I&apos;ve worked on. Each project represents a unique challenge and learning experience.
         </p>
         
         <div className="grid gap-6">

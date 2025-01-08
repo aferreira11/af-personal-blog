@@ -34,6 +34,7 @@ type NotionProperties = {
   img_width: { number: number };
   img_height: { number: number };
   featured: { checkbox: boolean };
+  published_date: { date: { start: string } };
 };
 
 // Add this type to make it clear which fields come from the page object itself
@@ -57,6 +58,7 @@ export interface NotionPage extends NotionPageMetadata {
   img_URL?: string;
   img_width?: number;
   img_height?: number;
+  published_date?: string;
 }
 
 // Fetches all content blocks for a specific Notion page
@@ -84,6 +86,7 @@ const transformPageResults = (page: PageObjectResponse): NotionPage => {
     img_width: props.img_width?.number ?? 0,    
     img_height: props.img_height?.number ?? 0,
     featured: props.featured?.checkbox ?? false,
+    published_date: props.published_date?.date?.start,
   };
 };
 
@@ -110,7 +113,7 @@ const getItemsByType = cache(async (type: ContentType): Promise<NotionPage[]> =>
     },
     sorts: [
       {
-        property: "created_time",
+        property: "published_date",
         direction: "descending",
       },
     ],
