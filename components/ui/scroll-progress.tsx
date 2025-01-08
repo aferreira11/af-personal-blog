@@ -1,8 +1,15 @@
 'use client';
 
-import { motion, SpringOptions, useScroll, useSpring } from 'motion/react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { RefObject } from 'react';
+
+interface SpringOptions {
+  stiffness?: number;
+  damping?: number;
+  mass?: number;
+  restDelta?: number;
+}
 
 interface ScrollProgressProps {
   className?: string;

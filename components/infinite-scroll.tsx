@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { BlogPost } from './blog-post'
 
@@ -15,6 +15,7 @@ interface Post {
     followers: string
   }
   image: string
+  slug: string
 }
 
 export function InfiniteScroll() {
@@ -22,7 +23,7 @@ export function InfiniteScroll() {
   const [page, setPage] = useState(1)
   const [ref, inView] = useInView()
 
-  const loadMorePosts = async () => {
+  const loadMorePosts = useCallback(async () => {
     // In a real application, you would fetch posts from an API
     // This is a mock implementation
     const newPosts: Post[] = [
@@ -36,7 +37,8 @@ export function InfiniteScroll() {
           avatar: "https://i.pravatar.cc/150?img=1",
           followers: "2.8K"
         },
-        image: `https://picsum.photos/seed/${page}-1/800/600`
+        image: `https://picsum.photos/seed/${page}-1/800/600`,
+        slug: `post-${page}-1`
       },
       {
         id: `post-${page}-2`,
@@ -48,18 +50,23 @@ export function InfiniteScroll() {
           avatar: "https://i.pravatar.cc/150?img=1",
           followers: "2.8K"
         },
-        image: `https://picsum.photos/seed/${page}-2/800/600`
+        image: `https://picsum.photos/seed/${page}-2/800/600`,
+        slug: `post-${page}-2`
       }
     ]
     setPosts(prevPosts => [...prevPosts, ...newPosts])
     setPage(prevPage => prevPage + 1)
-  }
+  }, [page])
 
-  useEffect(() => {
+  const handleScroll = useCallback(() => {
     if (inView) {
       loadMorePosts()
     }
-  }, [inView])
+  }, [inView, loadMorePosts])
+
+  useEffect(() => {
+    handleScroll()
+  }, [handleScroll])
 
   return (
     <div>

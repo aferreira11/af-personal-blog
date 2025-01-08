@@ -1,17 +1,13 @@
 'use client';
 import { motion, useInView, type Variants, type Transition } from 'framer-motion';
 import { type ReactNode, useRef } from 'react';
-import { cn } from '@/lib/utils';
 
-interface InViewProps {
+interface Props {
   children: ReactNode;
-  variants?: {
-    hidden: { [key: string]: any };
-    visible: { [key: string]: any };
-  };
+  variants?: Variants;
   transition?: Transition;
   className?: string;
-  amount?: number;
+  amount?: number | "some" | "all";
   once?: boolean;
 }
 
@@ -27,7 +23,7 @@ export function InView({
   className,
   amount,
   once,
-}: InViewProps) {
+}: Props) {
   const ref = useRef(null);
   const isInView = useInView(ref, { amount, once });
 

@@ -1,23 +1,20 @@
 'use client';
 
-import { motion, useSpring, type MotionValue } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { motion, useSpring } from 'framer-motion';
+import { useRef } from 'react';
 
 interface MagneticProps {
   children: React.ReactNode;
   intensity?: number;
   range?: number;
-  actionArea?: 'self' | 'parent' | 'global';
 }
 
 export function Magnetic({ 
   children, 
   intensity = 0.6,
-  range = 100,
-  actionArea = 'self' 
+  range = 100
 }: MagneticProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const x = useSpring(0, {
     stiffness: 150,

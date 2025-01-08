@@ -1,20 +1,14 @@
 import Image from "next/image"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Link from "next/link"
 
 interface BlogPostProps {
   date: string
   title: string
   excerpt: string
-  author: {
-    name: string
-    avatar: string
-    followers: string
-  }
-  image: string
+  slug: string
 }
 
-export function BlogPost({ date, title, excerpt, author, image }: BlogPostProps) {
+export function BlogPost({ date, title, excerpt, slug }: BlogPostProps) {
   return (
     <article className="grid md:grid-cols-2 gap-8 py-8">
       <div className="space-y-4">
@@ -47,7 +41,7 @@ export function BlogPost({ date, title, excerpt, author, image }: BlogPostProps)
       </div>
       <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
         <Image
-          src={image}
+          src={slug}
           alt={title}
           fill
           className="object-cover"

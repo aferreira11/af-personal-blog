@@ -1,7 +1,14 @@
 'use client';
 import React, { useRef, useState, useCallback, useEffect } from 'react';
-import { motion, useSpring, useTransform, SpringOptions } from 'motion/react';
+import { motion, useSpring, useTransform } from 'framer-motion';
 import { cn } from '@/lib/utils';
+
+interface SpringOptions {
+  stiffness?: number;
+  damping?: number;
+  mass?: number;
+  restDelta?: number;
+}
 
 type SpotlightProps = {
   className?: string;
@@ -12,7 +19,7 @@ type SpotlightProps = {
 export function Spotlight({
   className,
   size = 200,
-  springOptions = { bounce: 0 },
+  springOptions = { stiffness: 150, damping: 15 },
 }: SpotlightProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);

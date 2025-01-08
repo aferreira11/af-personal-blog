@@ -5,6 +5,8 @@ import { constructMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 
+export const runtime = 'edge';
+
 //Plugins
 import hljsPlugin from "@notion-render/hljs-plugin";
 import bookmarkPlugin from "@notion-render/bookmark-plugin";

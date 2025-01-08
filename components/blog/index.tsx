@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Breadcrumb } from "../breadcrumb";
 import { Badge } from "@/components/ui/badge";
-import { formatDate } from "@/lib/utils";
 
 interface PostProps {
   title: string;

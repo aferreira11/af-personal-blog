@@ -1,6 +1,8 @@
 import { notionClient } from '@/lib/notion';
 import { NextResponse } from 'next/server';
 
+export const runtime = 'edge';
+
 export async function POST(req: Request) {
   try {
     const { name, email, message } = await req.json();
